@@ -81,7 +81,13 @@ class Route implements AnnotationInterface
      *
      * @var array
      */
-    protected $children = array();
+    protected $children = [];
+
+    /**
+     * "priority" key in the standard config.
+     * @var int
+     */
+    protected $priority = 0;
 
     /**
      * Unused as AR currently supports only Doctrine's implementation of annotations.
@@ -105,7 +111,7 @@ class Route implements AnnotationInterface
      */
     public function hasName()
     {
-        return (bool) $this->name;
+        return (bool)$this->name;
     }
 
     /**
@@ -121,7 +127,7 @@ class Route implements AnnotationInterface
      */
     public function hasType()
     {
-        return (bool) $this->type;
+        return (bool)$this->type;
     }
 
     /**
@@ -137,7 +143,7 @@ class Route implements AnnotationInterface
      */
     public function hasRoute()
     {
-        return (bool) $this->route;
+        return (bool)$this->route;
     }
 
     /**
@@ -171,6 +177,7 @@ class Route implements AnnotationInterface
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -181,6 +188,7 @@ class Route implements AnnotationInterface
     public function setType($type)
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -191,6 +199,7 @@ class Route implements AnnotationInterface
     public function setRoute($route)
     {
         $this->route = $route;
+
         return $this;
     }
 
@@ -201,6 +210,7 @@ class Route implements AnnotationInterface
     public function setDefaults(array $defaults = null)
     {
         $this->defaults = $defaults;
+
         return $this;
     }
 
@@ -211,6 +221,7 @@ class Route implements AnnotationInterface
     public function setConstraints(array $constraints = null)
     {
         $this->constraints = $constraints;
+
         return $this;
     }
 
@@ -221,6 +232,7 @@ class Route implements AnnotationInterface
     public function setDefaultController($name)
     {
         $this->defaults['controller'] = $name;
+
         return $this;
     }
 
@@ -239,6 +251,7 @@ class Route implements AnnotationInterface
     public function setDefaultAction($name)
     {
         $this->defaults['action'] = $name;
+
         return $this;
     }
 
@@ -293,6 +306,7 @@ class Route implements AnnotationInterface
             $child->setRoute(ltrim($child->getRoute(), '/'));
         }
         $this->children[] = $child;
+
         return $this;
     }
 
@@ -311,6 +325,7 @@ class Route implements AnnotationInterface
     public function setExtends($extends)
     {
         $this->extends = $extends;
+
         return $this;
     }
 
@@ -328,7 +343,8 @@ class Route implements AnnotationInterface
      */
     public function setMayTerminate($flag)
     {
-        $this->mayTerminate = (bool) $flag;
+        $this->mayTerminate = (bool)$flag;
+
         return $this;
     }
 
@@ -358,10 +374,10 @@ class Route implements AnnotationInterface
         if ($this->extends) {
             throw new InvalidArgumentException(
                 'Child route cannot extend another one (not implemented). '
-                    . 'Seen in route "' . $this->name . '", '
-                    . 'route: "' . $this->route . '", '
-                    . 'tried to extend: "' . $this->extends . '"'
-                );
+                . 'Seen in route "' . $this->name . '", '
+                . 'route: "' . $this->route . '", '
+                . 'tried to extend: "' . $this->extends . '"'
+            );
         }
     }
 
@@ -380,6 +396,33 @@ class Route implements AnnotationInterface
                 }
             }
         }
+    }
+
+    /**
+     * @return int
+     */
+    public function getPriority()
+    {
+        return (int)$this->priority;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasPriority()
+    {
+        return !is_null($this->priority);
+    }
+
+    /**
+     * @param string $priority
+     * @return \AnnotatedRouter\Annotation\Route
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+
+        return $this;
     }
 
 }

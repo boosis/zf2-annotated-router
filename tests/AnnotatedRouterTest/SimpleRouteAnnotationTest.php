@@ -28,6 +28,7 @@ class SimpleRouteAnnotationTest extends AbstractAnnotationTestCase
         $this->assertEquals('segment', $route->getType());
         $this->assertEquals('nobase', $route->getDefaultController());
         $this->assertEquals('complete-definition-action', $route->getDefaultAction());
+        $this->assertEquals(1000, $route->getPriority());
     }
 
     public function testCompleteRoute()
@@ -43,23 +44,23 @@ class SimpleRouteAnnotationTest extends AbstractAnnotationTestCase
         $route = $annotations[0];
         $configBuilder->addPart($route);
 
-        $routeArray = array(
-            'complete-definition' => array(
-                'type' => 'segment',
-                'options' => array(
-                    'route' => '/complete-definition/:id/:method',
-                    'defaults' => array(
+        $routeArray = [
+            'complete-definition' => [
+                'type'          => 'segment',
+                'options'       => [
+                    'route'       => '/complete-definition/:id/:method',
+                    'defaults'    => [
                         'controller' => 'nobase',
-                        'action' => 'complete-definition-action',
-                    ),
-                    'constraints' => array(
-                        'id' => '\\d+',
+                        'action'     => 'complete-definition-action',
+                    ],
+                    'constraints' => [
+                        'id'     => '\\d+',
                         'method' => '\\w+',
-                    ),
-                ),
+                    ],
+                ],
                 'may_terminate' => true,
-            ),
-        );
+            ],
+        ];
 
         $this->assertEquals($routeArray, $configBuilder->toArray());
     }
@@ -78,20 +79,20 @@ class SimpleRouteAnnotationTest extends AbstractAnnotationTestCase
         $parser->autodetectMissingFields($route, $method, 'controllerkey');
         $configBuilder->addPart($route);
 
-        $routeArray = array(
-            'no-route-name' => array(
-                'type' => 'literal',
-                'options' => array(
-                    'route' => '/route',
-                    'defaults' => array(
+        $routeArray = [
+            'no-route-name' => [
+                'type'          => 'literal',
+                'options'       => [
+                    'route'       => '/route',
+                    'defaults'    => [
                         'controller' => 'nobase',
-                        'action' => 'no-route'
-                    ),
+                        'action'     => 'no-route'
+                    ],
                     'constraints' => null
-                ),
+                ],
                 'may_terminate' => true
-            )
-        );
+            ]
+        ];
 
         $this->assertEquals($routeArray, $configBuilder->toArray());
     }
@@ -110,20 +111,20 @@ class SimpleRouteAnnotationTest extends AbstractAnnotationTestCase
         $parser->autodetectMissingFields($route, $method, 'controllerkey');
         $configBuilder->addPart($route);
 
-        $routeArray = array(
-            'no-route' => array(
-                'type' => 'literal',
-                'options' => array(
-                    'route' => '/no-route',
-                    'defaults' => array(
+        $routeArray = [
+            'no-route' => [
+                'type'          => 'literal',
+                'options'       => [
+                    'route'       => '/no-route',
+                    'defaults'    => [
                         'controller' => 'nobase',
-                        'action' => 'no-route'
-                    ),
+                        'action'     => 'no-route'
+                    ],
                     'constraints' => null
-                ),
+                ],
                 'may_terminate' => true
-            )
-        );
+            ]
+        ];
 
         $this->assertEquals($routeArray, $configBuilder->toArray());
     }
@@ -142,20 +143,20 @@ class SimpleRouteAnnotationTest extends AbstractAnnotationTestCase
         $parser->autodetectMissingFields($route, $method, 'controllerkey');
         $configBuilder->addPart($route);
 
-        $routeArray = array(
-            'no-type' => array(
-                'type' => 'literal',
-                'options' => array(
-                    'route' => '/no-type',
-                    'defaults' => array(
+        $routeArray = [
+            'no-type' => [
+                'type'          => 'literal',
+                'options'       => [
+                    'route'       => '/no-type',
+                    'defaults'    => [
                         'controller' => 'nobase',
-                        'action' => 'no-route'
-                    ),
+                        'action'     => 'no-route'
+                    ],
                     'constraints' => null
-                ),
+                ],
                 'may_terminate' => true
-            )
-        );
+            ]
+        ];
 
         $this->assertEquals($routeArray, $configBuilder->toArray());
     }
@@ -176,20 +177,20 @@ class SimpleRouteAnnotationTest extends AbstractAnnotationTestCase
 
 //        die($this->coolFormat($configBuilder->toArray()));
 
-        $routeArray = array(
-            'no-controller' => array(
-                'type' => 'literal',
-                'options' => array(
-                    'route' => '/no-controller',
-                    'defaults' => array(
+        $routeArray = [
+            'no-controller' => [
+                'type'          => 'literal',
+                'options'       => [
+                    'route'       => '/no-controller',
+                    'defaults'    => [
                         'controller' => 'controllerkey',
-                        'action' => 'no-route'
-                    ),
+                        'action'     => 'no-route'
+                    ],
                     'constraints' => null
-                ),
+                ],
                 'may_terminate' => true
-            )
-        );
+            ]
+        ];
 
         $this->assertEquals($routeArray, $configBuilder->toArray());
     }
@@ -208,20 +209,20 @@ class SimpleRouteAnnotationTest extends AbstractAnnotationTestCase
         $parser->autodetectMissingFields($route, $method, 'controllerkey');
         $configBuilder->addPart($route);
 
-        $routeArray = array(
-            'no-action' => array(
-                'type' => 'literal',
-                'options' => array(
-                    'route' => '/no-action',
-                    'defaults' => array(
+        $routeArray = [
+            'no-action' => [
+                'type'          => 'literal',
+                'options'       => [
+                    'route'       => '/no-action',
+                    'defaults'    => [
                         'controller' => 'controllerkey',
-                        'action' => 'no-action'
-                    ),
+                        'action'     => 'no-action'
+                    ],
                     'constraints' => null
-                ),
+                ],
                 'may_terminate' => true
-            )
-        );
+            ]
+        ];
 
         $this->assertEquals($routeArray, $configBuilder->toArray());
     }

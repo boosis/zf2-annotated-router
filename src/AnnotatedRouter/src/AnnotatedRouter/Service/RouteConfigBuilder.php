@@ -24,7 +24,7 @@ class RouteConfigBuilder
      *
      * @var array
      */
-    protected $parts = array();
+    protected $parts = [];
 
     /**
      * Add a route.
@@ -39,6 +39,7 @@ class RouteConfigBuilder
         } else {
             $this->parts[] = $annotation;
         }
+
         return $this;
     }
 
@@ -49,7 +50,7 @@ class RouteConfigBuilder
      */
     public function toArray()
     {
-        $config = array();
+        $config = [];
         /* @var $part Route */
         foreach ($this->parts as $part) {
             $routeConfig = &$this->expand(explode('/', $part->getExtends()), $config);
@@ -59,6 +60,7 @@ class RouteConfigBuilder
                 $routeConfig[$part->getName()]['child_routes'][$child->getName()] = $this->buildRouteFromAnnotation($child);
             }
         }
+
         return $config;
     }
 
@@ -72,7 +74,7 @@ class RouteConfigBuilder
     protected function &expand(array $path, array &$config)
     {
         $path = array_filter($path, function ($value) {
-            return (bool) $value;
+            return (bool)$value;
         });
 
         $ref = &$config;
@@ -83,9 +85,9 @@ class RouteConfigBuilder
 
         foreach ($path as $key) {
             if (!isset($ref[$key])) {
-                $ref[$key] = array(
-                    'child_routes' => array()
-                );
+                $ref[$key] = [
+                    'child_routes' => []
+                ];
             }
             $ref = &$ref[$key]['child_routes'];
         }
@@ -95,21 +97,22 @@ class RouteConfigBuilder
 
     /**
      * Converts annotation into ZF2 route config item.
-     * 
+     *
      * @param AnnotationInterface $annotation
      * @return array
      */
     protected function buildRouteFromAnnotation(AnnotationInterface $annotation)
     {
-        return array(
-            'type' => $annotation->getType(),
-            'options' => array(
-                'route' => $annotation->getRoute(),
-                'defaults' => $annotation->getDefaults(),
+        return [
+            'type'          => $annotation->getType(),
+            'options'       => [
+                'route'       => $annotation->getRoute(),
+                'defaults'    => $annotation->getDefaults(),
                 'constraints' => $annotation->getConstraints()
-            ),
-            'may_terminate' => (bool) $annotation->getMayTerminate()
-        );
+            ],
+            'may_terminate' => (bool)$annotation->getMayTerminate(),
+            'priority'      => (int)$annotation->getPriority(),
+        ];
     }
 
 }

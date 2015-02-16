@@ -13,10 +13,12 @@ class NoBaseController extends AbstractActionController
      *     type="segment",
      *     defaults={"controller": "nobase", "action": "complete-definition-action"},
      *     constraints={"id": "\d+", "method": "\w+"}
+     *     priority=1000
      * )
      */
     public function completeDefinitionAction()
-    {}
+    {
+    }
 
     /**
      * @Router\Route(
@@ -26,7 +28,8 @@ class NoBaseController extends AbstractActionController
      * )
      */
     public function noRouteNameAction()
-    {}
+    {
+    }
 
     /**
      * @Router\Route(
@@ -35,7 +38,8 @@ class NoBaseController extends AbstractActionController
      * )
      */
     public function noRouteAction()
-    {}
+    {
+    }
 
     /**
      * @Router\Route(
@@ -43,7 +47,8 @@ class NoBaseController extends AbstractActionController
      * )
      */
     public function noTypeAction()
-    {}
+    {
+    }
 
     /**
      * @Router\Route(
@@ -51,11 +56,13 @@ class NoBaseController extends AbstractActionController
      * )
      */
     public function noControllerAction()
-    {}
+    {
+    }
 
     /**
      * @Router\Route
      */
     public function noActionAction()
-    {}
+    {
+    }
 }
