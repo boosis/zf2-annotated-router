@@ -87,7 +87,7 @@ class Route implements AnnotationInterface
      * "priority" key in the standard config.
      * @var int
      */
-    protected $priority = 0;
+    public $priority = 0;
 
     /**
      * Unused as AR currently supports only Doctrine's implementation of annotations.
