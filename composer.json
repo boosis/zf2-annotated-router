@@ -1,5 +1,5 @@
 {
-    "name": "alex-oleshkevich/zf2-annotated-router",
+    "name": "boosis/zf2-annotated-router",
     "description": "ZF2 module for annotation-based routing configuration.",
     "type": "library",
     "license": "GPL",
